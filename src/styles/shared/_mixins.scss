@@ -1,0 +1,36 @@
+// background image
+@mixin setBackgroundImage($url){
+  background: center no-repeat;
+  background-image: url($url);
+  background-size: cover;
+}
+
+@mixin centerContent(){
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// flex positioning
+@mixin flex($width, $display, $content, $align){
+  width: $width;
+  display: $display;
+  justify-content: $content;
+  align-items: $align;
+}
+
+// Positioning using top, right, bottom or left offsets
+@mixin positioningOffset($position, $top, $right, $bottom, $left){
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// border box padding
+@mixin paddingBorderBox($padding){
+  padding: $padding;
+  box-sizing: border-box;
+}

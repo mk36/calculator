@@ -1,0 +1,19 @@
+// variables and helpers
+@import "shared/_reset.scss";
+@import "shared/coloursAndFonts";
+@import "shared/mixins";
+@import "shared/breakpoints";
+@import "shared/classes";
+@import "shared/variables";
+
+// vendor/libraries
+@import "../../node_modules/@fortawesome/fontawesome-free/css/all.min.css"; //font awesome
+
+// ui kit
+@import "shared/ui-kit";
+
+
+// features
+
+// page specific
+//@import "pages/home.scss";

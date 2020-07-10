@@ -1,0 +1,14 @@
+// usually used for buttons
+.disabled{
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.full{
+  width: 100%;
+}
+
+.max-content-width{
+  max-width: 1000px;
+  margin: auto;
+}

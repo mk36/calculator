@@ -1,0 +1,59 @@
+html, body{
+  font-family: $primary-font;
+}
+
+// Text
+p, textarea{
+  @include setFontStyle($paragraph-font-size);
+}
+
+// Inputs
+$input-height: 30px;
+
+input{
+  text-indent: 5px;
+  padding: 0;
+  min-height: $input-height;
+}
+
+select{
+  height: $input-height;
+}
+
+// Headers
+h1{
+  @include setFontStyle($header-1-font-size);
+}
+
+h2{
+  @include setFontStyle($header-2-font-size);
+}
+
+h3{
+  @include setFontStyle($header-3-font-size);
+}
+
+h4{
+  @include setFontStyle($header-4-font-size);
+}
+
+h5{
+  @include setFontStyle($header-5-font-size);
+}
+
+// link
+a{
+  text-decoration: none;
+  color: initial;
+}
+
+// buttons
+button{
+  cursor: pointer;
+}
+
+// img
+img{
+  width: 100%;
+  height: auto;
+}
