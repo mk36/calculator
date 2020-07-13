@@ -19,6 +19,7 @@
 <template>
     <section class="calculator-screen" @click="$emit('screenClicked', true)">
         <p class="calculator-screen__equation">
+            <span class="calculator-screen__equation__item" v-if="equation.length === 0" style="opacity: 0">0</span>
             <span class="calculator-screen__equation__item" v-for="(item, index) in equation" :key="index">{{item}}</span>
         </p>
 

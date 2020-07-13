@@ -78,7 +78,6 @@
                     vm.calculatorModel.result = 0;
                     vm.calculatorModel.equation = '';
                     vm.resetEquation = false;
-                    console.log('reset equation');
                 }
             },
             piResult(){
@@ -161,7 +160,6 @@
              */
             viewMemoryPanel(value){
                 this.showMemoryPanel = value;
-                console.log('hide memory')
             }
         }
     }
