@@ -9,9 +9,14 @@ export default class EquationService{
     canAddToEquation(equation, key){
         let vm = this;
         let lastChar = vm.getLastStringCharacter(equation);
-        let isLastCharNumber = vm.isNumberKey(lastChar);
+        let isLastCharNumber = vm.isNumberKey(parseInt(lastChar));
 
         if(vm.isNumberKey(key)){ // can add if it's a number key
+            // maximum display of 9 whole number digits and 2 decimal place digits i.e. 123456789.00
+            if(isLastCharNumber){
+                return vm.isEquationDigitLengthValid(equation);
+            }
+
             return true;
         }
         else if(vm.isDotKey(key)){  // only add if number doesn't have a decimal in already
@@ -30,6 +35,33 @@ export default class EquationService{
     }
 
     /**
+     * Check if the equation number can add an extra digit or not
+     * @param equation
+     * @returns {boolean}
+     */
+    isEquationDigitLengthValid(equation){
+        let vm = this;
+        let maxDigits = 9;
+        let maxDecimal = 2;
+
+        let equationParts = vm.splitEquationIntoParts(equation); // get the equation parts
+        let lastNumber = equationParts[equationParts.length - 1]; // always a number due to previous checks
+        let lastNumberParts = lastNumber.split('.');
+        let isDecimal = lastNumber.includes('.');
+
+        if(isDecimal){
+            return !(lastNumberParts[1].length >= maxDecimal);
+        }
+        else{ // if not a decimal
+            if(lastNumberParts[0].length >= maxDigits){ // max digits reached can't add another
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * get the last character of the equation;
      * @param string
      * @returns {string}
@@ -44,7 +76,7 @@ export default class EquationService{
      * @returns {number}
      */
     isNumberKey(key){
-        return parseInt(key);
+        return Number.isInteger(key);
     }
 
     /**
@@ -106,7 +138,7 @@ export default class EquationService{
 
                 parts.push(key);
             }
-            else if(vm.isNumberKey(key) || vm.isDotKey(key)){ // add to the current number string
+            else if(vm.isNumberKey(parseInt(key)) || vm.isDotKey(key)){ // add to the current number string
                 curNumber += key;
             }
         }
