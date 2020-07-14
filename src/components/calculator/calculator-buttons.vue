@@ -62,17 +62,7 @@
         </div>
 
         <div class="function-buttons">
-<!--            <button v-for="(num, index) in 10" :key="index" class="calculator-button" @click="addToEquation(index, true);">{{index}}</button>-->
-            <button class="calculator-button" @click="addToEquation(7, true);">7</button>
-            <button class="calculator-button" @click="addToEquation(8, true);">8</button>
-            <button class="calculator-button" @click="addToEquation(9, true);">9</button>
-            <button class="calculator-button" @click="addToEquation(4, true);">4</button>
-            <button class="calculator-button" @click="addToEquation(5, true);">5</button>
-            <button class="calculator-button" @click="addToEquation(6, true);">6</button>
-            <button class="calculator-button" @click="addToEquation(1, true);">1</button>
-            <button class="calculator-button" @click="addToEquation(2, true);">2</button>
-            <button class="calculator-button" @click="addToEquation(3, true);">3</button>
-            <button class="calculator-button" @click="addToEquation(0, true);">0</button>
+            <button v-for="(num, index) in numPad" :key="index" class="calculator-button" @click="addToEquation(num, true);">{{num}}</button>
 
             <button class="calculator-button" @click="addToEquation('.')">.</button>
             <button class="calculator-button" @click="$emit('backspace')"><i class="fas fa-backspace"></i></button>
@@ -96,6 +86,7 @@
         },
         data: function(){
             return{
+                numPad: [7, 8, 9, 4, 5, 6, 1, 2, 3, 0],
                 equationService: new EquationService()
             }
         },
