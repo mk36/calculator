@@ -49,3 +49,6 @@ The colours used are purely ones that I liked, but are set using sass variables 
 
 The memory view button with modal was chosen over M+ and M- buttons so that users can quickly
 scroll through saved results and add them to an equation quickly compared to blindly tapping M+/M- repeatedly.
+
+A blue highlight was added to the result to highlight the = button has been pressed,
+otherwise with the auto-result on screen it looks the same and is hard to see the difference.
