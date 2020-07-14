@@ -5,7 +5,7 @@
         box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
         overflow: hidden;
         border-radius: 2%;
-        background-color: $greyWhite;
+        background-color: $white;
     }
 </style>
 

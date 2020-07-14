@@ -1,5 +1,6 @@
 <style lang="scss" scoped>
     .calculator-app{
+        background: $greyWhite;
         @include flex(100%, flex, center, center);
         flex-direction: column;
         height: 100vh;
