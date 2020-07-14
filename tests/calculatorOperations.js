@@ -1,4 +1,5 @@
 import { Selector } from 'testcafe';
+let faker = require('faker');
 import CalculatorHelperService from './calculatorHelperService';
 
 let helperService = new CalculatorHelperService();
@@ -56,6 +57,10 @@ test('Calculator must be capable of division', async t => {
     let keyDivide = await Selector('.calculator-button').withText('/');
     let total = keyNumberOne.number / keyNumberTwo.number;
 
+    if(total.toString().includes('.')){ // if result is a decimal round it up to meet validation
+        total = total.toFixed(2);
+    }
+
     await t.click(keyNumberOne.calcKey)
         .click(keyDivide)
         .click(keyNumberTwo.calcKey);
@@ -91,7 +96,7 @@ test('Calculator backspace button should remove one char from equation on click'
 });
 
 //Calculator should provide functionality to display the constant PI and, determine the square root of the currently displayed number.
-test.only('Calculator should display pie for the result of an equation', async t => {
+test('Calculator should display pie for the result of an equation', async t => {
     await helperService.pressKeys(t, ['3']); //
     await t.click(Selector('.pi-button'));
     await helperService.checkSelectorExists(t, '.calculator-screen__result', '9.42');
@@ -100,5 +105,21 @@ test.only('Calculator should display pie for the result of an equation', async t
 test('Calculator should display square root for the result of an equation', async t => {
     await helperService.pressKeys(t, ['7','x','7']); // 49 square root is 7
     await t.click(Selector('.sqrt-button'));
-    await helperService.checkSelectorExists(t, '.calculator-screen__result', '7.00');
+    await helperService.checkSelectorExists(t, '.calculator-screen__result', '7');
+});
+
+test('Calculator clear button should set the display to 0', async t => {
+    let randomNo = faker.random.number({'min': 3, 'max': 9});
+    let resultNum = '';
+
+    for(let i = 1; i <= randomNo; i++){
+        resultNum += i;
+        await helperService.pressKeys(t, i.toString());
+    }
+
+    let result = await Selector('.calculator-screen__result');
+    await t.expect(result.textContent).contains(resultNum);
+
+    await t.click(Selector('.calculator-button').withText('Clear'));
+    await helperService.checkSelectorExists(t, '.calculator-screen__result', '0'); // should show total
 });

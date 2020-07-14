@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "gh-pages-deploy": "node gh-pages-deploy.js"
+    "gh-pages-deploy": "node gh-pages-deploy.js",
+    "test": "testcafe chrome ./tests/*"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",

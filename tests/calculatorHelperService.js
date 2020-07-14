@@ -29,7 +29,7 @@ export default class CalculatorHelperService {
      * @returns {Promise<{number: *, calcKey: *}>}
      */
     async getRandomNumberKey(t){
-        let randomNo = faker.random.number({'min': 0, 'max': 9});
+        let randomNo = faker.random.number({'min': 1, 'max': 9});
         let key = await Selector('.calculator-button').withText(randomNo.toString());
 
         return {calcKey : key, number: randomNo}

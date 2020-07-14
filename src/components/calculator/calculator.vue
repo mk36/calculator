@@ -47,7 +47,8 @@
                 calculatorModel: {
                     result: 0,
                     equation: "",
-                    memory: []
+                    memory: [],
+                    charLimit: 11
                 },
                 showMemoryPanel: false,
                 resetEquation: false
@@ -60,12 +61,23 @@
             setUp: function () {
 
             },
+            /**
+             * Check that the character limit matches
+             * @param equation
+             * @returns {boolean}
+             */
+            isUnderCharLimit(equation){
+                let vm = this;
+                return equation.length < vm.calculatorModel.charLimit;
+            },
             addToEquation(key, solve){
                 let vm = this;
 
                 vm.checkEquationReset();
 
-                vm.calculatorModel.equation += key;
+                if(vm.isUnderCharLimit(vm.calculatorModel.equation)){
+                    vm.calculatorModel.equation += key;
+                }
 
                 if(solve){
                     vm.solveEquation();
@@ -135,23 +147,31 @@
                     vm.calculatorModel.memory = [];  // set memory to an empty array
                 }
                 else if (type === 'add'){
-                    vm.calculatorModel.memory.push(vm.calculatorModel.result);
+                    vm.calculatorModel.memory.push(vm.calculatorModel.result); // currently no limit and can have duplicates as other allow it
                 }
                 else if (type === 'view'){
                     vm.viewMemoryPanel(true);
                 }
                 else if (type === 'recall'){
                     let length = vm.calculatorModel.memory.length;
-                    if(length > 0){
-                        vm.calculatorModel.equation += vm.calculatorModel.memory[length -1];
-                        vm.solveEquation();
+                    if(length > 0 ){
+                        let newEquation = vm.calculatorModel.equation + vm.calculatorModel.memory[length -1];
+
+                        if(vm.isUnderCharLimit(newEquation)){
+                            vm.calculatorModel.equation = newEquation;
+                            vm.solveEquation();
+                        }
                     }
                 }
             },
             addMemoryToEquation(item){
                 let vm = this;
 
-                vm.calculatorModel.equation += item;
+                let newEquation = vm.calculatorModel.equation + item;
+
+                if(vm.isUnderCharLimit(newEquation)) {
+                    vm.calculatorModel.equation = newEquation;
+                }
                 vm.viewMemoryPanel(false);
             },
             /**

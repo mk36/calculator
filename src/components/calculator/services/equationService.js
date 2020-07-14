@@ -12,6 +12,10 @@ export default class EquationService{
         let isLastCharNumber = vm.isNumberKey(parseInt(lastChar));
 
         if(vm.isNumberKey(key)){ // can add if it's a number key
+            if(key.toString() === '0' && lastChar.toString() === '0'){ // don't allow 2 zeros together
+                return false;
+            }
+
             // maximum display of 9 whole number digits and 2 decimal place digits i.e. 123456789.00
             if(isLastCharNumber){
                 return vm.isEquationDigitLengthValid(equation);
